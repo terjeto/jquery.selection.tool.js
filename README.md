@@ -1,6 +1,17 @@
 SelectionToolJS
 ===============
 
-Hold down mousebutton and drag, and select dom items
+Hold down mousebutton and drag to select dom items
 
-blabla
+$('body').SelectionToolJS({
+  		lookFor: '.my_item',
+			markOn: function(item){
+				item.addClass('bounce animated');
+			},
+			markOff: function(item){
+				item.removeClass('bounce animated');
+			},
+			markEnd: function(item){
+				item.removeClass('bounce animated');
+			}
+});
