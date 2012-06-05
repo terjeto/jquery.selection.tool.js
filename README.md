@@ -2,7 +2,7 @@ SelectionToolJS
 ===============
 
 Hold down mousebutton and drag to select dom items
-
+"""
 $('body').SelectionToolJS({
   		lookFor: '.my_item',
 			markOn: function(item){
@@ -15,3 +15,4 @@ $('body').SelectionToolJS({
 				item.removeClass('bounce animated');
 			}
 });
+"""
