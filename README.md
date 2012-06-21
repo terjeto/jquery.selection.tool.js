@@ -1,7 +1,7 @@
 jquery selection tool
 Developed by Terje at www.symphonical.com
 
-For demo see: http://jsfiddle.net/terjeto/jW2Cv/embedded/result/
+For demo see: http://jsfiddle.net/terjeto/jW2Cv/4/embedded/result/
 
 =====================
 
