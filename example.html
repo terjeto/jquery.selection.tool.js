@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html  xmlns="http://www.w3.org/1999/xhtml" dir="ltr" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+		<title>SelectionToolJS - simple javascript selection tool based on JQuery</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+		<script src="jquery.selection.tool.js" type="text/javascript"></script>
+		<link href="jquery.selection.tool.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="page">
+			<h1>SelectionToolJS demo</h1>
+			<div>
+				<p>
+				SelectionToolJS is a plugin for JQuery which is dependant upon JQuery UI.
+				It was developed as a fun mini-project by Terje Torma (<a href="http://www.Symphonical.com">Symphonical.com</a>).
+				</p>
+				<br />
+				<p>
+				SelectionToolJS enables selection of dom elements by drawing a box to encapsulate the desired targets.
+				It has option to enable dragging on those targets.
+				All the drag operations are event-delegated so that no new handlers needs to be added if dom changes.
+				</p>
+				</br>
+				<strong>The examples below are mostly conceptual rather than practical.</strong>
+				</br></br>
+			</div>
+			<div class="demobox demo1">
+				<h2>1: Select then drag <strong class="msg">Drag from inside the box</strong></h2>
+				<div class="demo1_item_container" style="height: 150px;">
+					<span class="demo1_item">Some item</span>
+					<span class="demo1_item">Some item</span>
+					<span class="demo1_item">Some item</span>
+					<span class="demo1_item">Some item</span>
+					<span class="demo1_item">Some item</span>
+				</div>
+				<div class="console"><div></div></div>
+			</div>
+			<div class="demobox demo2">
+				<h2>2: Make order <strong class="msg">Drag from inside the box</strong></h2>
+				<div>
+					<span>O</span>
+					<span>R</span>
+					<span>D</span>
+					<span>E</span>
+					<span>R</span>
+				</div>
+				<div class="console"><div></div></div>
+			</div>
+			<div class="demobox demo3">
+				<h2>3: Reveal "hidden text" <strong class="msg">Drag from inside the box</strong></h2>
+				<div class="hidden_text">Hidden text? What is this good for anyway?</div>
+				<div class="console"><div></div></div>
+			</div>
+			<div class="demobox">
+				<h2>Code example</h2>
+				<pre>
+$('.demo1').disableSelection().SelectionToolJS({
+	lookFor: '.demo1_item',
+	hitRule: 'partial',
+	selectClass: 'marker',
+	cursor: 'crosshair',
+	selectStart: function(e){
+		log($('.demo1'), 'Start', true);
+	},
+	selectOn: function(item, ui){
+		item.addClass('selected');
+		log($('.demo1'), 'Selected');
+	},
+	selectOff: function(item, ui){
+		item.removeClass('selected');
+		log($('.demo1'), 'Deselected');
+	},
+	selectEnd: function(ui){
+		log($('.demo1'), 'End');
+	},
+	enableDrag: {
+		start: function(e, ui, dragItems){
+			log($('.demo1'), 'Start drag', true);
+			dragItems.addClass('demo1_is_dragging');
+		},
+		drag: function(e, ui){
+		},
+		stop: function(e, ui, dragItems){
+			$('.demo1_item').removeClass('demo1_is_dragging');
+			$('.demo1_item').stop().css({left: '', top: '', margin: '10px 5px', position: 'relative'}).appendTo('.demo1_item_container');
+			log($('.demo1'), 'End drag');
+		}
+	}
+});</pre>
+			</div>
+		</div>
+		<script type="text/javascript">
+		$(document).ready(function($) {
+			/**
+				Logger help function
+			*/
+			var log = function(el, str, empty){
+				if(empty===true){
+					el.find('.console div:eq(0)').empty();
+				}
+				el.find('.console div:eq(0)').append($('<div />').text(str));
+			}
+			/**
+				Demo 1
+			*/
+			$('.demo1').disableSelection().SelectionToolJS({
+				lookFor: '.demo1_item',
+				hitRule: 'partial',
+				selectClass: 'marker',
+				cursor: 'crosshair',
+				enableDrag: {
+					start: function(e, ui, dragItems){
+						log($('.demo1'), 'Start drag', true);
+						dragItems.addClass('demo1_is_dragging');
+					},
+					drag: function(e, ui){
+					},
+					stop: function(e, ui, dragItems){
+						// reset style (fishy..)
+						$('.demo1_item').removeClass('demo1_is_dragging');
+						$('.demo1_item').stop().css({left: '', top: '', margin: '10px 5px', position: 'relative'}).appendTo('.demo1_item_container');
+						log($('.demo1'), 'End drag');
+					}
+				},
+				selectStart: function(e){
+					log($('.demo1'), 'Start', true);
+				},
+				selectOn: function(item, ui){
+					item.addClass('selected');
+					log($('.demo1'), 'Selected');
+				},
+				selectOff: function(item, ui){
+					item.removeClass('selected');
+					log($('.demo1'), 'Deselected');
+				},
+				selectEnd: function(ui){
+					log($('.demo1'), 'End');
+				}
+			});
+			/**
+				Demo 2
+			*/
+			$('.demo2 span').each(function(){
+				var rnd_rot = Math.random() * 40;
+				var rnd_pre = Math.random();
+				rnd_pre = (rnd_pre < .5) ? '-' : '';
+				$(this).css({'-webkit-transform':'rotate('+rnd_pre+rnd_rot+'deg)'});
+			});
+			$('.demo2').disableSelection().SelectionToolJS({
+				lookFor: '.demo2 span',
+				hitRule: 'partial',
+				selectClass: 'marker',
+				exclude: 'smiley',
+				cursor: 'crosshair',
+				selectStart: function(e){
+					$('.demo2 .smiley').remove();
+					log($('.demo2'), 'Start', true);
+				},
+				selectOn: function(item, ui){
+					item.addClass('selected');
+					item.data('transform', item.css('-webkit-transform'));
+					item.css({borderColor: '#000', '-webkit-transform':'rotate(0deg)'});
+					if($('.demo2 .selected').length == $('.demo2 span').length){
+						$('.demo2 .smiley').remove();
+						$('<span />').addClass('smiley').css({background: 'yellow'}).text(':-)').appendTo(item.parent());
+					}
+					log($('.demo2'), 'Selected');
+				},
+				selectOff: function(item, ui){
+					item.removeClass('selected');
+					item.css({borderColor: '#555', '-webkit-transform': item.data('transform')});
+					$('.demo2 .smiley').remove();
+					log($('.demo2'), 'Deselected');
+				},
+				selectEnd: function(ui){
+					log($('.demo2'), 'End');
+				}
+			});
+			/** 
+				Demo 3
+			*/
+			var arr = $('.demo3 .hidden_text').text();
+			$('.demo3 .hidden_text').empty();
+			for(num in arr){
+				$('.demo3 .hidden_text').append($('<span />').text(arr[num]).addClass('fragment').css({opacity: 0, color: '#000'}));
+			}
+			$('.demo3').disableSelection().SelectionToolJS({
+				lookFor: '.fragment',
+				hitRule: 'partial',
+				selectClass: 'marker',
+				cursor: 'crosshair',
+				selectStart: function(e, ui){
+					log($('.demo3'), 'Start', true);
+				},
+				selectOn: function(item, ui){
+					item.stop().animate({opacity: 1});
+					log($('.demo3'), item.text()+' Revealed');
+				},
+				selectOff: function(item, ui){
+					item.stop().css({opacity: 0});
+					log($('.demo3'), 'Hide');
+				},
+				selectEnd: function(ui){
+					log($('.demo3'), 'End');
+				}
+			});
+		});
+		</script>
+	</body>
+</html>

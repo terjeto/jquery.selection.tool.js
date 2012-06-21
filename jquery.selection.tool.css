@@ -1,0 +1,112 @@
+@import url(http://reset5.googlecode.com/hg/reset.min.css);
+
+body {
+	background: #777;
+	line-height: 1.4;
+}
+#page {
+	background: #fff;
+	margin: 50px auto;
+	padding: 50px;
+	width: 720px;
+	border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+h1 {
+	font-size: 27px;
+}
+pre {
+	background: #eee;
+	border: 1px dashed #aaa;
+	font-family: monospace;
+	color: #555;
+	font-size: 12px;
+	overflow: auto;
+	padding: 10px;
+}
+.marker {
+	background: rgba(114, 159, 207, .4);
+	border: 1px solid #66e;
+}
+.demobox {
+	position: relative;
+	padding: 30px;
+	border: 1px solid #aaa;
+}
+.demobox .console {
+	width: 150px;
+	height: 100%;
+	line-height: 1.0;
+	background: #eee;
+	color: #555;
+	font-size: 12px;
+	overflow: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.demobox .console div {
+	margin: 5px;
+}
+
+.demobox h2 {
+	background: #eee;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+.demobox .msg {
+	visibility: hidden;
+	color: red;
+}
+
+/**
+	Demo 1
+*/
+.demo1_item {
+	display: inline-block;
+	margin: 10px 5px;
+	padding: 10px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #555;
+	border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+	background: #ff9999;
+	background: -moz-linear-gradient(top, #ff9999 0%, #cc4444 100%);
+    background: -webkit-linear-gradient(top, #ff9999 0%,#cc4444 100%);
+    background: linear-gradient(top, #ff9999 0%,#cc4444 100%);
+}
+.demo1_item.selected {
+	cursor: move;
+	background: #00ff00;
+	background: -moz-linear-gradient(top, #55ff55 0%, #00aa00 100%);
+    background: -webkit-linear-gradient(top, #55ff55 0%,#00aa00 100%);
+    background: linear-gradient(top, #55ff55 0%,#00aa00 100%);
+}
+
+/** 
+	Demo 2
+*/
+.demo2 span {
+	display: inline-block;
+	margin: 10px 5px;
+	padding: 5px;
+	background: #eee;
+	font-size: 18px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #555;
+}
+
+/**
+	Demo 3
+*/
+.hidden_text {
+	margin: 50px 0px;
+	font-size: 26px;
+}
+.hidden_text .fragment {
+}
+
