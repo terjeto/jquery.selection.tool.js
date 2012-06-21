@@ -1,6 +1,8 @@
 jquery selection tool
 Developed by Terje at www.symphonical.com
 
+For demo see: http://jsfiddle.net/terjeto/jW2Cv/embedded/result/
+
 =====================
 
 Hold down mousebutton and drag to select dom elements.
